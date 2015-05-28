@@ -83,7 +83,7 @@ a:hover, a:focus {
 .github-link {
 	font-size: 0.95em;
 	position: absolute;
-	right: 40px;
+	right: 60px;
 	top: 22px;
 }
 
@@ -94,9 +94,9 @@ a:hover, a:focus {
 .hero {
 	position: absolute;
 	top: 60px;
-	left: 30px;
-	bottom: 30px;
-	right: 30px;
+	left: 60px;
+	bottom: 60px;
+	right: 60px;
 	overflow: hidden;
 }
 
@@ -141,7 +141,7 @@ a:hover, a:focus {
 	text-align: center;
 	font-size: 0.85em;
 	white-space: nowrap;
-	left: 30px;
+	left: 60px;
 	top: 15px;
 }
 
