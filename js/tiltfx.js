@@ -148,8 +148,8 @@
 		if( this.options.extraImgs < 1 ) {
 			this.options.extraImgs = 1;
 		}
-		else if( this.options.extraImgs > 5 ) {
-			this.options.extraImgs = 5;
+		else if( this.options.extraImgs > 64 ) {
+			this.options.extraImgs = 64;
 		}
 
 		if( !this.options.movement.perspective ) {
@@ -176,8 +176,51 @@
 		this.el.parentNode.insertBefore(this.tiltWrapper, this.el);
 		this.el.parentNode.removeChild(this.el);
 
-		// tiltWrapper properties: width/height/left/top
-		this.view = { width : this.tiltWrapper.offsetWidth, height : this.tiltWrapper.offsetHeight };
+		// set mosemove element area and view restrictions
+		this._setViewWatcher(this);
+		this._setMouseMoveWatcher(this);
+
+		// viewWatcher properties: width/height/left/top
+		this._calcView(this);
+	};
+
+	TiltFx.prototype._calcView = function(self) {
+		self.view = {
+			width : self.viewWatcher.offsetWidth,
+			height : self.viewWatcher.offsetHeight
+		};
+	};
+
+	TiltFx.prototype._setMouseMoveWatcher = function(self) {
+		var isSet = false;
+
+		if(self.options.element && self.options.element.mouseMoveWatcher) {
+			var mouseMoveWatcherElement = document.querySelector(self.options.element.mouseMoveWatcher);
+
+			self.mouseMoveWatcher = mouseMoveWatcherElement;
+			isSet = true;
+		}
+
+		if(!isSet) {
+			self.mouseMoveWatcher = self.viewWatcher;
+		}
+	};
+
+	TiltFx.prototype._setViewWatcher = function(self) {
+		var isSet = false;
+
+		if(self.options.element && self.options.element.viewWatcher) {
+			var customElementRelative = document.querySelector(self.options.element.viewWatcher);
+
+			if(customElementRelative) {
+				self.viewWatcher = customElementRelative;
+				isSet = true;
+			}
+		}
+
+		if(!isSet) {
+			self.viewWatcher = self.tiltWrapper;
+		}
 	};
 
 	/**
@@ -188,7 +231,7 @@
 			moveOpts = self.options.movement;
 
 		// mousemove event..
-		this.tiltWrapper.addEventListener('mousemove', function(ev) {
+		self.mouseMoveWatcher.addEventListener('mousemove', function(ev) {
 			requestAnimationFrame(function() {
 					// mouse position relative to the document.
 				var mousepos = getMousePos(ev),
@@ -218,7 +261,7 @@
 		});
 
 		// reset all when mouse leaves the main wrapper.
-		this.tiltWrapper.addEventListener('mouseleave', function(ev) {
+		self.mouseMoveWatcher.addEventListener('mouseleave', function() {
 			setTimeout(function() {
 			for(var i = 0, len = self.imgElems.length; i < len; ++i) {
 				var el = self.imgElems[i];
@@ -230,9 +273,9 @@
 		});
 
 		// window resize
-		window.addEventListener('resize', throttle(function(ev) {
-			// recalculate tiltWrapper properties: width/height/left/top
-			self.view = { width : self.tiltWrapper.offsetWidth, height : self.tiltWrapper.offsetHeight };
+		window.addEventListener('resize', throttle(function() {
+			// recalculate viewWatcher properties: width/height/left/top
+			this._calcView(this);
 		}, 50));
 	};
 
