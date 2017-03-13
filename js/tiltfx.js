@@ -128,6 +128,13 @@
 			rotateX : 2, // a relative rotation of -2deg to 2deg on the x-axis (perspective value must be set)
 			rotateY : 2, // a relative rotation of -2deg to 2deg on the y-axis (perspective value must be set)
 			rotateZ : 0 // z-axis rotation; by default there's no rotation on the z-axis (perspective value must be set)
+		},
+		// element for relative custom position offset
+		element : {
+			// element what will be bind to mousemove
+			mouseMoveWatcher: null,
+			// element for set bounds of mousemove
+			viewWatcher: null
 		}
 	}
 
