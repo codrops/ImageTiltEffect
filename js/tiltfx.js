@@ -119,6 +119,8 @@
 		opacity : 0.7,
 		// by default the first layer does not move.
 		bgfixed : true,
+		// use reset style for mouseleave event
+		resetOnLeave: true,
 		// image element's movement configuration
 		movement : {
 			perspective : 1000, // perspective value
@@ -268,16 +270,18 @@
 		});
 
 		// reset all when mouse leaves the main wrapper.
-		self.mouseMoveWatcher.addEventListener('mouseleave', function() {
-			setTimeout(function() {
-			for(var i = 0, len = self.imgElems.length; i < len; ++i) {
-				var el = self.imgElems[i];
-				el.style.WebkitTransform = 'perspective(' + moveOpts.perspective + 'px) translate3d(0,0,0) rotate3d(1,1,1,0deg)';
-				el.style.transform = 'perspective(' + moveOpts.perspective + 'px) translate3d(0,0,0) rotate3d(1,1,1,0deg)';
-			}	
-			}, 60);
-			
-		});
+		if(self.options.resetOnLeave) {
+			self.mouseMoveWatcher.addEventListener('mouseleave', function () {
+				setTimeout(function () {
+					for (var i = 0, len = self.imgElems.length; i < len; ++i) {
+						var el = self.imgElems[i];
+						el.style.WebkitTransform = 'perspective(' + moveOpts.perspective + 'px) translate3d(0,0,0) rotate3d(1,1,1,0deg)';
+						el.style.transform = 'perspective(' + moveOpts.perspective + 'px) translate3d(0,0,0) rotate3d(1,1,1,0deg)';
+					}
+				}, 60);
+
+			});
+		}
 
 		// window resize
 		window.addEventListener('resize', throttle(function() {
