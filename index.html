@@ -105,8 +105,13 @@
 				<dl class="def-list">
 					<dt><strong>extraImgs</strong></dt>
 					<dd>
-						<p>Number of extra background-image divisions; min:1, max:5</p>
+						<p>Number of extra background-image divisions; min:1, max:64</p>
 						<p><code>extraImgs : 2</code></p>
+					</dd>
+					<dt><strong>extraImgsScaleGrade</strong></dt>
+					<dd>
+						<p>Float number for set scale gradient. This option create effect like tunnel or add more perspective</p>
+						<p><code>extraImgsScaleGrade : 0</code></p>
 					</dd>
 					<dt><strong>opacity</strong></dt>
 					<dd>
@@ -117,6 +122,11 @@
 					<dd>
 						<p>Movement of first layer; by default it's not moving</p>
 						<p><code>bgfixed : true</code></p>
+					</dd>
+					<dt><strong>resetOnLeave</strong></dt>
+					<dd>
+						<p>If true when mouse leave detect area style of images will be reset to zero state</p>
+						<p><code>resetOnLeave : true</code></p>
 					</dd>
 					<dt><strong>movement</strong></dt>
 					<dd>
@@ -157,6 +167,25 @@
 							<dd>
 								<p>The relative rotation on the Z-axis. A perspective value needs to be set.</p>
 								<p><code>rotateZ : 0</code></p>
+							</dd>
+						</dl>
+					</dd>
+					<dt><strong>element</strong></dt>
+					<dd>
+						<p>Element config make possible set detect area from css selectors</p>
+						<p><code>element : { ... }</code></p>
+						<dl class="def-list">
+							<dt><strong>mouseMoveWatcher</strong></dt>
+							<dd>
+								<p>The mouseMoveWatcher set css selector with element what catch mouse move events.</p>
+								<p>As example, you can set 'body' for detect mouse move on whole page</p>
+								<p><code>mouseMoveWatcher : null|string</code></p>
+							</dd>
+							<dt><strong>viewWatcher</strong></dt>
+							<dd>
+								<p>The viewWatcher is css selector for calculate element relative offsets of extra images.</p>
+								<p>As example, this may be one block of your page with height about 100vh</p>
+								<p><code>viewWatcher : null|string</code></p>
 							</dd>
 						</dl>
 					</dd>
