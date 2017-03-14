@@ -169,13 +169,14 @@
 
 		// add the extra image elements.
 		this.imgElems = [];
+		var frontExtraImagesCount = this.options.extraImgs;
 
 		if( !this.options.bgfixed ) {
 			this.imgElems.push(this.tiltImgBack);
 			++this.options.extraImgs;
 		}
 
-		for(var i = 0; i < this.options.extraImgs; ++i) {
+		for(var i = 0; i < frontExtraImagesCount; ++i) {
 			var el = document.createElement('div');
 			el.className = 'tilt__front';
 			el.style.backgroundImage = 'url(' + this.el.src + ')';
@@ -183,6 +184,7 @@
 			this.tiltWrapper.appendChild(el);
 			this.imgElems.push(el);
 		}
+		console.log('this.imgElems', this.options, this.imgElems);
 
 		// add it to the DOM and remove original img element.
 		this.el.parentNode.insertBefore(this.tiltWrapper, this.el);
