@@ -115,6 +115,8 @@
 	TiltFx.prototype.options = {
 		// number of extra image elements (div with background-image) to add to the DOM - min:1, max:5 (for a higher number, it's recommended to remove the transitions of .tilt__front in the stylesheet.
 		extraImgs : 2,
+		// set scale factor - value what use to set scale gradients for each extra img
+		extraImgsScaleGrade: 0,
 		// the opacity value for all the image elements.
 		opacity : 0.7,
 		// by default the first layer does not move.
@@ -167,6 +169,12 @@
 
 		// add the extra image elements.
 		this.imgElems = [];
+
+		if( !this.options.bgfixed ) {
+			this.imgElems.push(this.tiltImgBack);
+			++this.options.extraImgs;
+		}
+
 		for(var i = 0; i < this.options.extraImgs; ++i) {
 			var el = document.createElement('div');
 			el.className = 'tilt__front';
@@ -174,11 +182,6 @@
 			el.style.opacity = this.options.opacity;
 			this.tiltWrapper.appendChild(el);
 			this.imgElems.push(el);
-		}
-
-		if( !this.options.bgfixed ) {
-			this.imgElems.push(this.tiltImgBack);
-			++this.options.extraImgs;
 		}
 
 		// add it to the DOM and remove original img element.
@@ -261,10 +264,26 @@
 						rotZ = moveOpts.rotateZ ? 2 * ((i+1)*moveOpts.rotateZ/self.options.extraImgs) / self.view.width * relmousepos.x - ((i+1)*moveOpts.rotateZ/self.options.extraImgs) : 0,
 						transX = moveOpts.translateX ? 2 * ((i+1)*moveOpts.translateX/self.options.extraImgs) / self.view.width * relmousepos.x - ((i+1)*moveOpts.translateX/self.options.extraImgs) : 0,
 						transY = moveOpts.translateY ? 2 * ((i+1)*moveOpts.translateY/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateY/self.options.extraImgs) : 0,
-						transZ = moveOpts.translateZ ? 2 * ((i+1)*moveOpts.translateZ/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateZ/self.options.extraImgs) : 0;
+						transZ = moveOpts.translateZ ? 2 * ((i+1)*moveOpts.translateZ/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateZ/self.options.extraImgs) : 0,
 
-					el.style.WebkitTransform = 'perspective(' + moveOpts.perspective + 'px) translate3d(' + transX + 'px,' + transY + 'px,' + transZ + 'px) rotate3d(1,0,0,' + rotX + 'deg) rotate3d(0,1,0,' + rotY + 'deg) rotate3d(0,0,1,' + rotZ + 'deg)';
-					el.style.transform = 'perspective(' + moveOpts.perspective + 'px) translate3d(' + transX + 'px,' + transY + 'px,' + transZ + 'px) rotate3d(1,0,0,' + rotX + 'deg) rotate3d(0,1,0,' + rotY + 'deg) rotate3d(0,0,1,' + rotZ + 'deg)';
+						scale = 1 + (self.options.extraImgsScaleGrade * (len - (i+1))),
+						scaleCss = (scale !== 1) ? ' scale(' + scale + ', ' + scale + ')' : '';
+
+					el.style.WebkitTransform =
+						'perspective(' + moveOpts.perspective + 'px)' +
+						' translate3d(' + transX + 'px,' + transY + 'px,' + transZ + 'px)' +
+						' rotate3d(1,0,0,' + rotX + 'deg)' +
+						' rotate3d(0,1,0,' + rotY + 'deg)' +
+						' rotate3d(0,0,1,' + rotZ + 'deg)' +
+						scaleCss;
+
+					el.style.transform =
+						'perspective(' + moveOpts.perspective + 'px)' +
+						' translate3d(' + transX + 'px,' + transY + 'px,' + transZ + 'px)' +
+						' rotate3d(1,0,0,' + rotX + 'deg)' +
+						' rotate3d(0,1,0,' + rotY + 'deg)' +
+						' rotate3d(0,0,1,' + rotZ + 'deg)' +
+						scaleCss;
 				}
 			});
 		});
