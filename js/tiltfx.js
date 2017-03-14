@@ -157,10 +157,13 @@
 
 		// image elements limit.
 		if( this.options.extraImgs < 1 ) {
-			this.options.extraImgs = 1;
+			this.imgCount = 0;
 		}
 		else if( this.options.extraImgs > 64 ) {
-			this.options.extraImgs = 64;
+			this.imgCount = 64;
+		}
+		else {
+			this.imgCount = this.options.extraImgs;
 		}
 
 		if( !this.options.movement.perspective ) {
@@ -169,11 +172,11 @@
 
 		// add the extra image elements.
 		this.imgElems = [];
-		var frontExtraImagesCount = this.options.extraImgs;
+		var frontExtraImagesCount = this.imgCount;
 
 		if( !this.options.bgfixed ) {
 			this.imgElems.push(this.tiltImgBack);
-			++this.options.extraImgs;
+			++this.imgCount;
 		}
 
 		for(var i = 0; i < frontExtraImagesCount; ++i) {
@@ -184,7 +187,6 @@
 			this.tiltWrapper.appendChild(el);
 			this.imgElems.push(el);
 		}
-		console.log('this.imgElems', this.options, this.imgElems);
 
 		// add it to the DOM and remove original img element.
 		this.el.parentNode.insertBefore(this.tiltWrapper, this.el);
@@ -250,7 +252,10 @@
 					// mouse position relative to the document.
 				var mousepos = getMousePos(ev),
 					// document scrolls.
-					docScrolls = {left : document.body.scrollLeft + document.documentElement.scrollLeft, top : document.body.scrollTop + document.documentElement.scrollTop},
+					docScrolls = {
+						left : document.body.scrollLeft + document.documentElement.scrollLeft,
+						top : document.body.scrollTop + document.documentElement.scrollTop
+					},
 					bounds = self.tiltWrapper.getBoundingClientRect(),
 					// mouse position relative to the main element (tiltWrapper).
 					relmousepos = {
@@ -261,12 +266,12 @@
 				// configure the movement for each image element.
 				for(var i = 0, len = self.imgElems.length; i < len; ++i) {
 					var el = self.imgElems[i],
-						rotX = moveOpts.rotateX ? 2 * ((i+1)*moveOpts.rotateX/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.rotateX/self.options.extraImgs) : 0,
-						rotY = moveOpts.rotateY ? 2 * ((i+1)*moveOpts.rotateY/self.options.extraImgs) / self.view.width * relmousepos.x - ((i+1)*moveOpts.rotateY/self.options.extraImgs) : 0,
-						rotZ = moveOpts.rotateZ ? 2 * ((i+1)*moveOpts.rotateZ/self.options.extraImgs) / self.view.width * relmousepos.x - ((i+1)*moveOpts.rotateZ/self.options.extraImgs) : 0,
-						transX = moveOpts.translateX ? 2 * ((i+1)*moveOpts.translateX/self.options.extraImgs) / self.view.width * relmousepos.x - ((i+1)*moveOpts.translateX/self.options.extraImgs) : 0,
-						transY = moveOpts.translateY ? 2 * ((i+1)*moveOpts.translateY/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateY/self.options.extraImgs) : 0,
-						transZ = moveOpts.translateZ ? 2 * ((i+1)*moveOpts.translateZ/self.options.extraImgs) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateZ/self.options.extraImgs) : 0,
+						rotX = moveOpts.rotateX ? 2 * ((i+1)*moveOpts.rotateX/self.imgCount) / self.view.height * relmousepos.y - ((i+1)*moveOpts.rotateX/self.imgCount) : 0,
+						rotY = moveOpts.rotateY ? 2 * ((i+1)*moveOpts.rotateY/self.imgCount) / self.view.width * relmousepos.x - ((i+1)*moveOpts.rotateY/self.imgCount) : 0,
+						rotZ = moveOpts.rotateZ ? 2 * ((i+1)*moveOpts.rotateZ/self.imgCount) / self.view.width * relmousepos.x - ((i+1)*moveOpts.rotateZ/self.imgCount) : 0,
+						transX = moveOpts.translateX ? 2 * ((i+1)*moveOpts.translateX/self.imgCount) / self.view.width * relmousepos.x - ((i+1)*moveOpts.translateX/self.imgCount) : 0,
+						transY = moveOpts.translateY ? 2 * ((i+1)*moveOpts.translateY/self.imgCount) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateY/self.imgCount) : 0,
+						transZ = moveOpts.translateZ ? 2 * ((i+1)*moveOpts.translateZ/self.imgCount) / self.view.height * relmousepos.y - ((i+1)*moveOpts.translateZ/self.imgCount) : 0,
 
 						scale = 1 + (self.options.extraImgsScaleGrade * (len - (i+1))),
 						scaleCss = (scale !== 1) ? ' scale(' + scale + ', ' + scale + ')' : '';
