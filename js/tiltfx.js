@@ -113,12 +113,14 @@
 	 * TiltFx options.
 	 */
 	TiltFx.prototype.options = {
-		// number of extra image elements (div with background-image) to add to the DOM - min:1, max:5 (for a higher number, it's recommended to remove the transitions of .tilt__front in the stylesheet.
+		// number of extra image elements (div with background-image) to add to the DOM - min:0, max:64 (for a higher number, it's recommended to remove the transitions of .tilt__front in the stylesheet.
 		extraImgs : 2,
 		// set scale factor - value what use to set scale gradients for each extra img
 		extraImgsScaleGrade: 0,
 		// the opacity value for all the image elements.
 		opacity : 0.7,
+		// when use set array of opacity for each image from bottom to top
+		customImgsOpacity: false,
 		// by default the first layer does not move.
 		bgfixed : true,
 		// use reset style for mouseleave event
@@ -152,6 +154,7 @@
 		// main image element.
 		this.tiltImgBack = document.createElement('div');
 		this.tiltImgBack.className = 'tilt__back';
+		this.tiltImgBack.tiltFxType = 'back';
 		this.tiltImgBack.style.backgroundImage = 'url(' + this.el.src + ')';
 		this.tiltWrapper.appendChild(this.tiltImgBack);
 
@@ -173,6 +176,7 @@
 		// add the extra image elements.
 		this.imgElems = [];
 		var frontExtraImagesCount = this.imgCount;
+		var customImgsOpacity = this.options.customImgsOpacity;
 
 		if( !this.options.bgfixed ) {
 			this.imgElems.push(this.tiltImgBack);
@@ -183,10 +187,12 @@
 			var el = document.createElement('div');
 			el.className = 'tilt__front';
 			el.style.backgroundImage = 'url(' + this.el.src + ')';
-			el.style.opacity = this.options.opacity;
 			this.tiltWrapper.appendChild(el);
 			this.imgElems.push(el);
 		}
+
+		// set opacity for images
+		this._initSetImagesOpacity();
 
 		// add it to the DOM and remove original img element.
 		this.el.parentNode.insertBefore(this.tiltWrapper, this.el);
@@ -198,6 +204,34 @@
 
 		// viewWatcher properties: width/height/left/top
 		this._calcView(this);
+	};
+
+	/**
+	 * Set images opacity.
+	 * @private
+	 */
+	TiltFx.prototype._initSetImagesOpacity = function() {
+		if(this.options.customImgsOpacity) {
+			for(var i = 0, len = this.imgElems.length; i < len; ++i) {
+				var opacity = (this.options.customImgsOpacity[i])
+					? this.options.customImgsOpacity[i]
+					: this.options.opacity;
+
+				this.imgElems[i].style.opacity = opacity;
+
+			}
+
+		}
+		else {
+			for(var i = 0, len = this.imgElems.length; i < len; ++i) {
+				if(this.imgElems[i].tiltFxType === 'back') {
+					continue;
+				}
+
+				this.imgElems[i].style.opacity = this.options.opacity;
+			}
+
+		}
 	};
 
 	TiltFx.prototype._calcView = function(self) {
