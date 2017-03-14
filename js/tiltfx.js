@@ -100,13 +100,17 @@
 
 	/**
 	 * TiltFx fn
+	 * @param {HTMLElement} img element
+	 * @param {object} options
 	 */
 	function TiltFx(el, options) {
-		this.el = el;
-		this.options = extend( {}, this.options );
-		extend( this.options, options );
-		this._init();
-		this._initEvents();
+			if(el) {
+			this.el = el;
+			this.options = extend( {}, this.options );
+			extend( this.options, options );
+			this._init();
+			this._initEvents();
+		}
 	}
 
 	/**
@@ -350,14 +354,17 @@
 		}, 50));
 	};
 
-	function init() {
+	/**
+	 * Init tiltFx on each imgs with the class "tilt-effect"
+	 */
+	TiltFx.prototype.init = function() {
 		// search for imgs with the class "tilt-effect"
 		[].slice.call(document.querySelectorAll('img.tilt-effect')).forEach(function(img) {
 			new TiltFx(img, JSON.parse(img.getAttribute('data-tilt-options')));
 		});
-	}
+	};
 
-	init();
+	(new TiltFx()).init();
 
 	window.TiltFx = TiltFx;
 
