@@ -305,7 +305,7 @@
 		// window resize
 		window.addEventListener('resize', throttle(function() {
 			// recalculate viewWatcher properties: width/height/left/top
-			this._calcView(this);
+			self._calcView(self);
 		}, 50));
 	};
 
