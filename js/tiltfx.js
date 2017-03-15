@@ -104,7 +104,7 @@
 	 * @param {object} options
 	 */
 	function TiltFx(el, options) {
-			if(el) {
+		if(el) {
 			this.el = el;
 			this.options = extend( {}, this.options );
 			extend( this.options, options );
