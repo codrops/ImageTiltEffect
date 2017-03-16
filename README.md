@@ -8,6 +8,7 @@ A subtle tilt effect for images. The idea is to move and rotate semi-transparent
 [Demo](http://tympanus.net/Development/ImageTiltEffect/)
 
 Integrate or build upon it for free in your personal or commercial projects. Don't republish, redistribute or sell "as-is". 
+If you are having trouble initializing the data-tilt-options check the index.html file just above for good examples.
 
 Read more here: [License](http://tympanus.net/codrops/licensing/)
 
