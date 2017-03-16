@@ -97,6 +97,111 @@
 }</code></pre>
 						</div>
 					</li>
+					<li class="grid__item">
+						<div class="grid__img grid__img--border">
+							<img src="img/2.jpg" class="tilt-effect" data-tilt-options='{ "extraImgs" : 2, "extraImgsScaleGrade": -0.05, "opacity" : 0.7, "bgfixed" : false, "movement": { "perspective" : 1000, "translateX" : 30, "translateY" : 30, "translateZ" : -50, "rotateX" : 3, "rotateY" : 3, "rotateZ" : 10 } }' alt="grid01" />
+						</div>
+						<div class="grid__item-title">
+						Demo extraImgsScaleGrade. Options:
+<pre><code>"extraImgs" : 2,
+"extraImgsScaleGrade": -0.05,
+"opacity" : 0.7,
+"bgfixed" : false,
+"movement": { 
+	"perspective" : 1000, 
+	"translateX" : 30, 
+	"translateY" : 30, 
+	"translateZ" : -50, 
+	"rotateX" : 0, 
+	"rotateY" : 0,
+	"rotateZ" : 10, 
+}</code></pre>
+						</div>
+					</li>
+					<li class="grid__item">
+						<div class="grid__img grid__img--border">
+							<img src="img/2.jpg" class="tilt-effect" data-tilt-options='{ "extraImgs" : 2, "opacity" : 0.7, "bgfixed" : false, "resetOnLeave" : false, "movement": { "perspective" : 1000, "translateX" : 30, "translateY" : 30, "translateZ" : -50, "rotateX" : 3, "rotateY" : 3, "rotateZ" : 10 } }' alt="grid01" />
+						</div>
+						<div class="grid__item-title">
+						Demo resetOnLeave. Options:
+<pre><code>"extraImgs" : 2,
+"opacity" : 0.7,
+"bgfixed" : false,
+"resetOnLeave" : false,
+"movement": { 
+	"perspective" : 1000, 
+	"translateX" : 30, 
+	"translateY" : 30, 
+	"translateZ" : -50, 
+	"rotateX" : 0, 
+	"rotateY" : 0,
+	"rotateZ" : 10, 
+}</code></pre>
+						</div>
+					</li>
+					<li class="grid__item" id="demo-mouseMoveWatcher">
+						<div class="grid__img grid__img--border">
+							<img src="img/2.jpg" class="tilt-effect" data-tilt-options='{ "extraImgs" : 2, "opacity" : 0.7, "bgfixed" : false, "movement": { "perspective" : 1000, "translateX" : 30, "translateY" : 30, "translateZ" : -50, "rotateX" : 3, "rotateY" : 3, "rotateZ" : 10 }, "element" : { "mouseMoveWatcher" : "#demo-mouseMoveWatcher" } }' alt="grid01" />
+						</div>
+						<div class="grid__item-title">
+						Demo element.mouseMoveWatcher. Options:
+<pre><code>"extraImgs" : 2,
+"opacity" : 0.7,
+"bgfixed" : false,
+"movement": {
+	"perspective" : 1000,
+	"translateX" : 30,
+	"translateY" : 30,
+	"translateZ" : -50,
+	"rotateX" : 0,
+	"rotateY" : 0,
+	"rotateZ" : 10,
+},
+"element" : {
+	"mouseMoveWatcher" : "#demo-mouseMoveWatcher",
+}</code></pre>
+						</div>
+					</li>
+					<li class="grid__item">
+						<div class="grid__img grid__img--border">
+							<img src="img/2.jpg" class="tilt-effect" data-tilt-options='{ "extraImgs" : false, "bgfixed" : false, "movement": { "perspective" : 1000, "translateX" : 30, "translateY" : 30, "translateZ" : -50, "rotateX" : 3, "rotateY" : 3, "rotateZ" : 10 } }' alt="grid01" />
+						</div>
+						<div class="grid__item-title">
+						Demo without create ext images. Options:
+<pre><code>"extraImgs" : false,
+"bgfixed" : false,
+"movement": {
+	"perspective" : 1000,
+	"translateX" : 30,
+	"translateY" : 30,
+	"translateZ" : -50,
+	"rotateX" : 0,
+	"rotateY" : 0,
+	"rotateZ" : 10,
+}</code></pre>
+						</div>
+					</li>
+					<li class="grid__item">
+						<div class="grid__img grid__img--border">
+							<img src="img/2.jpg" class="tilt-effect" data-tilt-options='{ "extraImgs" : 2, "opacity" : 0.7, "bgfixed" : false, "customImgsOpacity" : [0.2, 0.5, 0.03], "movement": { "perspective" : 1000, "translateX" : 30, "translateY" : 30, "translateZ" : -50, "rotateX" : 3, "rotateY" : 3, "rotateZ" : 10 } }' alt="grid01" />
+						</div>
+						<div class="grid__item-title">
+						Demo customImgsOpacity. Options:
+<pre><code>"extraImgs" : 2,
+"opacity" : 0.7,
+"bgfixed" : false,
+"customImgsOpacity" : [0.2, 0.5, 0.03],
+"movement": { 
+	"perspective" : 1000, 
+	"translateX" : 30, 
+	"translateY" : 30, 
+	"translateZ" : -50, 
+	"rotateX" : 0, 
+	"rotateY" : 0,
+	"rotateZ" : 10, 
+}</code></pre>
+						</div>
+					</li>
 				</ul>
 			</div>
 			<div class="content">
@@ -105,18 +210,34 @@
 				<dl class="def-list">
 					<dt><strong>extraImgs</strong></dt>
 					<dd>
-						<p>Number of extra background-image divisions; min:1, max:5</p>
+						<p>Number of extra background-image divisions; min:1, max:64</p>
 						<p><code>extraImgs : 2</code></p>
+					</dd>
+					<dt><strong>extraImgsScaleGrade</strong></dt>
+					<dd>
+						<p>Float number for set scale gradient. This option create effect like tunnel or add more perspective</p>
+						<p><code>extraImgsScaleGrade : 0</code></p>
 					</dd>
 					<dt><strong>opacity</strong></dt>
 					<dd>
 						<p>The opacity value for the background-image divisions</p>
 						<p><code>opacity : 0.7</code></p>
 					</dd>
+					<dt><strong>customImgsOpacity</strong></dt>
+					<dd>
+						<p>The customImgsOpacity make possible set custom opacity for each layer as array of opacity values.</p>
+						<p>If length of customImgsOpacity less then layers created then script will use option "opacity"</p>
+						<p><code>customImgsOpacity : false</code></p>
+					</dd>
 					<dt><strong>bgfixed</strong></dt>
 					<dd>
 						<p>Movement of first layer; by default it's not moving</p>
 						<p><code>bgfixed : true</code></p>
+					</dd>
+					<dt><strong>resetOnLeave</strong></dt>
+					<dd>
+						<p>If true when mouse leave detect area style of images will be reset to zero state</p>
+						<p><code>resetOnLeave : true</code></p>
 					</dd>
 					<dt><strong>movement</strong></dt>
 					<dd>
@@ -157,6 +278,25 @@
 							<dd>
 								<p>The relative rotation on the Z-axis. A perspective value needs to be set.</p>
 								<p><code>rotateZ : 0</code></p>
+							</dd>
+						</dl>
+					</dd>
+					<dt><strong>element</strong></dt>
+					<dd>
+						<p>Element config make possible set detect area from css selectors</p>
+						<p><code>element : { ... }</code></p>
+						<dl class="def-list">
+							<dt><strong>mouseMoveWatcher</strong></dt>
+							<dd>
+								<p>The mouseMoveWatcher set css selector with element what catch mouse move events.</p>
+								<p>As example, you can set 'body' for detect mouse move on whole page</p>
+								<p><code>mouseMoveWatcher : null|string</code></p>
+							</dd>
+							<dt><strong>viewWatcher</strong></dt>
+							<dd>
+								<p>The viewWatcher is css selector for calculate element relative offsets of extra images.</p>
+								<p>As example, this may be one block of your page with height about 100vh</p>
+								<p><code>viewWatcher : null|string</code></p>
 							</dd>
 						</dl>
 					</dd>
