@@ -1,0 +1,60 @@
+/*author: rishav krishna(https://github.com/rishu22*/
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WaterEffect</title>
+	<style>
+	
+	body{
+    
+    margin: 0;
+    padding: 0;
+    background: #262626;
+    font-family: arial;
+}
+.loader{
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loader h1{
+    
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 10em;
+    color: rgba(255,255,255,.1);
+    background-image: url(waves.jpg);
+    background-repeat: repeat-x;
+    -webkit-background-clip:text;
+    animation: animate 15s linear infinite;
+}
+@keyframes animate{
+    
+    0%
+    {
+        background-position: left 0px top 170px;
+    }
+     40%
+    {
+        background-position: left 800px top -50px;
+    }
+     80%
+    {
+        background-position: left 1800px top -50px;
+    }
+     100%
+    {
+        background-position: left 2400px top 90px;
+    }
+}"
+	</style>
+    </head>
+    <body>
+        <div class="loader">
+            <h1>Rishav</h1>
+        </div>
+    </body>
+</html>
